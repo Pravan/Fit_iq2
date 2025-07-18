@@ -61,5 +61,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 //downladable fonts
     implementation("androidx.compose.ui:ui-text-google-fonts:1.8.1")
+    //windows size class
+    implementation("androidx.compose.material3:material3-window-size-class-android:1.3.2")
 }
 

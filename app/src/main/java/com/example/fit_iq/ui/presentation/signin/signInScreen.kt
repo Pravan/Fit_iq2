@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +28,14 @@ import com.example.fit_iq.ui.presentation.component.GoogleSignInButton
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 
 @Composable
-fun SignInScreen(){
+fun signInScreen(
+    windowSize: WindowWidthSizeClass
+){
+    when(windowSize){
+        WindowWidthSizeClass.Compact->{
+
+        }
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,6 +74,8 @@ fun SignInScreen(){
 @Composable
 private fun SignInScreenPreview(){
     Fit_iqTheme {
-        SignInScreen()
+        signInScreen(
+            windowSize = WindowWidthSizeClass.Compact
+        )
     }
 }
