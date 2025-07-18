@@ -1,4 +1,4 @@
-package com.example.fit_iq.ui.theme
+package com.example.fit_iq.ui.presentation
 
 import androidx.compose.ui.graphics.Color
 
