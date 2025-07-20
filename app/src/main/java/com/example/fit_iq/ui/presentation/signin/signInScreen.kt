@@ -6,7 +6,9 @@ import android.content.pm.SigningInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -16,6 +18,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
@@ -30,43 +33,97 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 @Composable
 fun signInScreen(
     windowSize: WindowWidthSizeClass
-){
-    when(windowSize){
-        WindowWidthSizeClass.Compact->{
+) {
+    when (windowSize) {
+        WindowWidthSizeClass.Compact -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            )
+            {
+
+                Image(
+                    painter = painterResource(id = R.drawable.app_logo),
+                    contentDescription = "App Logo",
+                    modifier = Modifier.size(200.dp)
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = " FITNESS APP",
+                    style = MaterialTheme.typography.headlineLarge
+                )
+                Text(
+                    text = "   Measure Progress, Achieve Goals",
+                    style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic)
+                )
+                Spacer(modifier = Modifier.fillMaxSize(fraction = 0.4f))
+                GoogleSignInButton(
+
+                    onclick = {}
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                AnonymousSignInButton(
+                    onclick = {}
+                )
+
+
+            }
+
+
+        }
+
+        else -> {
+            Row (
+                 modifier = Modifier.fillMaxSize()
+            ){
+                Column(
+                    modifier = Modifier.fillMaxHeight().weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ){
+                    Image(
+                        painter = painterResource(id = R.drawable.app_logo),
+                        contentDescription = "App Logo",
+                        modifier = Modifier.size(200.dp)
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Text(
+                        text = " FITNESS APP",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                    Text(
+                        text = "   Measure Progress, Achieve Goals",
+                        style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic)
+                    )
+                }
+                Column(
+                    modifier = Modifier.fillMaxHeight().weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ){
+                    GoogleSignInButton(
+
+                        onclick = {}
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    AnonymousSignInButton(
+                        onclick = {}
+                    )
+
+
+                }
+
+
+            }
 
         }
     }
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ){
-        Image(painter = painterResource(id = R.drawable.app_logo),
-            contentDescription = "App Logo",
-            modifier = Modifier.size(200.dp)
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(text = " FITNESS APP",
-            style = MaterialTheme.typography.headlineLarge
-        )
-        Text(text = "   Measure Progress, Achieve Goals",
-            style = MaterialTheme.typography.bodySmall.copy(fontStyle =  FontStyle.Italic)
-        )
-        Spacer(modifier = Modifier.fillMaxSize(fraction = 0.4f))
-        GoogleSignInButton(
-
-            onclick = {}
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        AnonymousSignInButton(
-            onclick = {}
-        )
-
-
-    }
-
 
 }
+
+
+
 
 
 
@@ -75,7 +132,7 @@ fun signInScreen(
 private fun SignInScreenPreview(){
     Fit_iqTheme {
         signInScreen(
-            windowSize = WindowWidthSizeClass.Compact
+            windowSize = WindowWidthSizeClass.Medium
         )
     }
 }

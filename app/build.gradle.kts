@@ -63,5 +63,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.8.1")
     //windows size class
     implementation("androidx.compose.material3:material3-window-size-class-android:1.3.2")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
 }
 
