@@ -67,5 +67,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
+
+    //coil
+    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
 }
 
