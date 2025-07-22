@@ -19,7 +19,7 @@ fun Dashboardscreen() {
         modifier = Modifier.fillMaxHeight()
     ) {
         DashboardTopBar(
-            profilePicUrl = "https://yt3.googleusercontent.com/ytc/AIdro_l-6FQr2F5viYuELhfXHiUU46MqDNZkXPwUqbdZagQMt9A=s900-c-k-c0x00ffffff-no-rj",
+            profilePicUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8gkNoPnjOus19SLG3UgrYWcxiS7RLzcsKzw&s ",
             onProfilePicClick = {}
         )
     }
