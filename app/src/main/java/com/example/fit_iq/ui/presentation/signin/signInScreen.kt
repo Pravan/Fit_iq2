@@ -2,7 +2,6 @@ package com.example.fit_iq.ui.presentation.signin
 
 
 
-import android.content.pm.SigningInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,24 +15,42 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.example.fit_iq.R
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.component.AnonymousSignInButton
 import com.example.fit_iq.ui.presentation.component.GoogleSignInButton
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
 
 @Composable
 fun signInScreen(
     windowSize: WindowWidthSizeClass
 ) {
+
+
+
+    var isSignInAnonymousDialogOpen by rememberSaveable { mutableStateOf(false) }
+    Fit_iqDialog(
+        isOpen = isSignInAnonymousDialogOpen,
+        title = "Login anonymously?",
+        body = {
+            Text(
+                text = "You can login anonymously, but you will not be able to save your progress after uninstalling the app . " +
+                        "Are you sure Do you want to continue?"
+            )
+        },
+        onDialogDismiss  = {isSignInAnonymousDialogOpen = false},
+        onConfirmButtonClick = {isSignInAnonymousDialogOpen = false}
+    )
     when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             Column(
@@ -64,7 +81,7 @@ fun signInScreen(
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 AnonymousSignInButton(
-                    onclick = {}
+                    onclick = {isSignInAnonymousDialogOpen=true}
                 )
 
 
@@ -121,8 +138,6 @@ fun signInScreen(
     }
 
 }
-
-
 
 
 
