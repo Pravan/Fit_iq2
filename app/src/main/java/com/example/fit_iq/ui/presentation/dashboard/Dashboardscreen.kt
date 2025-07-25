@@ -1,28 +1,90 @@
 package com.example.fit_iq.ui.presentation.dashboard
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
+import com.example.fit_iq.domain.model.BodyPart
+import com.example.fit_iq.domain.model.predefinedBodyParts
+import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.component.ProfilePicPlaceholder
+import com.example.fit_iq.ui.presentation.signin.signInScreen
+
+
 
 @Composable
 fun Dashboardscreen() {
-    Column(
+    Box(
         modifier = Modifier.fillMaxHeight()
-    ) {
-        DashboardTopBar(
-            profilePicUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8gkNoPnjOus19SLG3UgrYWcxiS7RLzcsKzw&s ",
-            onProfilePicClick = {}
+    ){
+        Column(
+            modifier = Modifier.fillMaxHeight()
         )
+
+        {
+            DashboardTopBar(
+                profilePicUrl = "https://i.ytimg.com/vi/RAgxkwkAsQE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDr7rBN10U7lwhsmKYERBuFMS1xKw",
+                onProfilePicClick = {}
+            )
+            LazyVerticalGrid(
+                modifier = Modifier.fillMaxHeight(),
+                columns = GridCells.Adaptive(minSize = 300.dp),
+                contentPadding = PaddingValues(16.dp , top = 8.dp , 16.dp ,16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(32.dp)
+
+            ) {
+                items(predefinedBodyParts) { bodyPart ->
+                    ItemCard(
+                        bodyPart = bodyPart
+                    )
+                }
+
+            }
+
+        }
+        FloatingActionButton(
+            modifier = Modifier
+            .align(Alignment.BottomEnd)
+                .padding(24.dp),
+
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(imageVector = Icons.Default.Add, contentDescription = "Add Icon")
+        }
+
     }
+
+
 }
 
 
@@ -51,20 +113,82 @@ private fun DashboardTopBar(modifier: Modifier = Modifier,
         }
     )
 }
-
-
-
-
-
-
-//preview
-@PreviewScreenSizes
 @Composable
-private fun DashboardscreenPreviw(){
-    Dashboardscreen()
+private fun ItemCard(
+    modifier : Modifier = Modifier,
+    bodyPart: BodyPart
 
+) {
+    Card(
+        modifier = modifier,
+        onClick = { /*TODO*/ }
+    ) {
+        Row(
+            modifier =Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier.weight(8f),
+                text = bodyPart.name,
+                style = MaterialTheme.typography.bodyLarge,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(modifier = Modifier.weight(1f))
 
+            Text(
+                text = "${bodyPart.latestValue ?:""} ${bodyPart.measuringUnit}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.size(10.dp))
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(4.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = "Show details",
+                    modifier = Modifier.size(15.dp)
+                )
+
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // preview
+    @PreviewScreenSizes
+    @Composable
+    private fun DashboardScreenPreview(){
+        Fit_iqTheme {
+            Dashboardscreen()
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 

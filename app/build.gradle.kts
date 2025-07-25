@@ -1,5 +1,6 @@
 
 
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -60,9 +61,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 //downladable fonts
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.8.1")
+    implementation(libs.androidx.compose.ui.textGoogleFonts)
+
     //windows size class
-    implementation("androidx.compose.material3:material3-window-size-class-android:1.3.2")
+    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.core:core-ktx:1.12.0")
