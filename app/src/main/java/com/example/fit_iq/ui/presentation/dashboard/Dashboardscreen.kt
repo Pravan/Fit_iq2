@@ -25,8 +25,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,15 +40,53 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.example.fit_iq.domain.model.BodyPart
+import com.example.fit_iq.domain.model.User
 import com.example.fit_iq.domain.model.predefinedBodyParts
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
+import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
+import com.example.fit_iq.ui.presentation.component.ProfileBottomSheet
 import com.example.fit_iq.ui.presentation.component.ProfilePicPlaceholder
 import com.example.fit_iq.ui.presentation.signin.signInScreen
 
 
 
+
 @Composable
 fun Dashboardscreen() {
+
+
+    var isSignOutDialogOpen by rememberSaveable { mutableStateOf(false) }
+    var isProfileBottomSheetOpen by remember { mutableStateOf(false) }
+    val user = User(
+        name ="Pravanjan Behera",
+        email = "pravanjanb79@gmail.com",
+        profilePictureUrl = "https://yt3.googleusercontent.com/ytc/AIdro_mDcuRtpml1p-NVm4ql66W0OWKj60qMc4Jj79uDiw74Mc4=s160-c-k-c0x00ffffff-no-rj",
+        isAnonymous = false
+    )
+
+    ProfileBottomSheet(
+        isOpen = isProfileBottomSheetOpen ,
+        user = null,
+        buttonLoadingState = false,
+        buttonPrimaryText = "Sign out with Google",
+        onBottomSheetDismiss = {isProfileBottomSheetOpen = false},
+        onGoogleButtonClick = {isSignOutDialogOpen= true}
+    )
+
+
+    Fit_iqDialog(
+        isOpen = isSignOutDialogOpen,
+        title = "Sign Out",
+        body = {
+            Text(
+                text = "Are you want to sign out? "
+
+            )
+        },
+        onDialogDismiss  = {isSignOutDialogOpen = false},
+        onConfirmButtonClick = {isSignOutDialogOpen = false}
+    )
+
     Box(
         modifier = Modifier.fillMaxHeight()
     ){
@@ -52,8 +96,8 @@ fun Dashboardscreen() {
 
         {
             DashboardTopBar(
-                profilePicUrl = "https://i.ytimg.com/vi/RAgxkwkAsQE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDr7rBN10U7lwhsmKYERBuFMS1xKw",
-                onProfilePicClick = {}
+                profilePicUrl = user.profilePictureUrl,
+                onProfilePicClick = {isProfileBottomSheetOpen= true}
             )
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxHeight(),
