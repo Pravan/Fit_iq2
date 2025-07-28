@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
+import com.example.fit_iq.ui.presentation.add_item.AddItemScreen
 import com.example.fit_iq.ui.presentation.dashboard.Dashboardscreen
 import com.example.fit_iq.ui.presentation.signin.signInScreen
 
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Fit_iqTheme {
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
-                Dashboardscreen()
+                AddItemScreen()
 
 
             }

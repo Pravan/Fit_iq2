@@ -102,7 +102,7 @@ fun Dashboardscreen() {
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxHeight(),
                 columns = GridCells.Adaptive(minSize = 300.dp),
-                contentPadding = PaddingValues(16.dp , top = 8.dp , 16.dp ,16.dp),
+                contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalArrangement = Arrangement.spacedBy(32.dp)
 
