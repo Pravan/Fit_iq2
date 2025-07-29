@@ -15,9 +15,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -28,12 +31,28 @@ import com.example.fit_iq.domain.model.BodyPart
 import com.example.fit_iq.domain.model.MeasuringUnit
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
+import com.example.fit_iq.ui.presentation.component.MeasuringUnitBottomSheet
+import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsScreen(
-
-){
+fun DetailsScreen(){
+    val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var isMeasuringUnitBottomSheetOpen by remember { mutableStateOf(false,)}
+    MeasuringUnitBottomSheet(
+        isOpen =isMeasuringUnitBottomSheetOpen ,
+        sheetState = sheetState,
+        onBottomSheetDismiss = {isMeasuringUnitBottomSheetOpen=false},
+        onItemClicked = {
+            scope.launch{ sheetState.hide() }.invokeOnCompletion {
+                if(!sheetState.isVisible) {
+                    isMeasuringUnitBottomSheetOpen = false
+                }
+            }
+        }
+    )
 
     var isDeleteBodyPartDialogOpen by rememberSaveable { mutableStateOf(false) }
     Fit_iqDialog(
@@ -55,8 +74,8 @@ fun DetailsScreen(
         DetailsTopBar(
             bodyPart = BodyPart(name = "shoulder", isActive = true, measuringUnit = MeasuringUnit.CM.code) ,
             onBackIconClick = {},
-            onDeleteIconClick =  {isDeleteBodyPartDialogOpen=true},
-            onUnitIconClick = {}
+            onDeleteIconClick =  {isDeleteBodyPartDialogOpen= true },
+            onUnitIconClick = {isMeasuringUnitBottomSheetOpen= true }
         )
     }
 }
