@@ -12,6 +12,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.add_item.AddItemScreen
 import com.example.fit_iq.ui.presentation.dashboard.Dashboardscreen
+import com.example.fit_iq.ui.presentation.details.DetailsScreen
 import com.example.fit_iq.ui.presentation.signin.signInScreen
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -24,7 +25,8 @@ import com.example.fit_iq.ui.presentation.signin.signInScreen
         setContent {
             Fit_iqTheme {
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
-                AddItemScreen()
+                DetailsScreen()
+
 
 
             }
