@@ -5,7 +5,7 @@ data class BodyPart(
     val isActive: Boolean,
     val measuringUnit:String,
     val latestValue: Float?=null,
-    val bodyPartid:String? = null
+    val bodyPartid: String? = null
 )
 
 val predefinedBodyParts: List<BodyPart> = listOf(
