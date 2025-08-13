@@ -23,3 +23,15 @@ fun LocalDate?.changeLocalDateToGraphDate(
     }
 }
 
+fun LocalDate?.changeLocalDateToDateString(
+    defaultValue: LocalDate=LocalDate.now()
+): String{
+    return try {
+        this?.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+            ?: defaultValue.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+
+    } catch (e: Exception) {
+        defaultValue.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+    }
+}
+
