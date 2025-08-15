@@ -38,7 +38,9 @@ import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
 
 
 @Composable
-fun AddItemScreen(){
+fun AddItemScreen(
+    onBackIconClick: () -> Unit
+){
 
     var isAddNewItemDialogOpen by rememberSaveable { mutableStateOf(false) }
     Fit_iqDialog(
@@ -56,7 +58,7 @@ fun AddItemScreen(){
     ){
         AddItemTopBar(
             onAddIconClick = {isAddNewItemDialogOpen = true},
-            onBackIconClick = {}
+            onBackIconClick = onBackIconClick
         )
         LazyVerticalGrid(
             modifier = Modifier.fillMaxHeight(),
@@ -86,13 +88,13 @@ fun AddItemScreen(){
 @Composable
 private fun AddItemTopBar(modifier: Modifier = Modifier,
                             onAddIconClick : () -> Unit,
-                          onBackIconClick:() ->Unit
+                            onBackIconClick: () -> Unit,
 ) {
     TopAppBar(
         modifier = modifier,
-        title = { Text(text = "Add new Item") },
+        title = { Text(text = "Add Item") },
         navigationIcon = {
-            IconButton(onClick = { onAddIconClick() }) {
+            IconButton(onClick = { onBackIconClick() }) {
 
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -159,5 +161,7 @@ private fun ItemCard(
 @PreviewScreenSizes
 @Composable
 private fun AddItemScreenPreview() {
-   AddItemScreen()
+   AddItemScreen(
+       onBackIconClick = {}
+   )
 }

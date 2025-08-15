@@ -36,7 +36,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberModalBottomSheetState
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -48,14 +47,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.example.fit_iq.domain.model.BodyPart
@@ -70,7 +67,6 @@ import com.example.fit_iq.ui.presentation.component.MeasuringUnitBottomSheet
 import com.example.fit_iq.ui.presentation.component.NewValueInputBar
 import com.example.fit_iq.ui.presentation.util.PastOrPresentSelectableDates
 import com.example.fit_iq.ui.presentation.util.changeLocalDateToDateString
-import com.example.fit_iq.ui.presentation.util.changeLocalDateToGraphDate
 import com.example.fit_iq.ui.presentation.util.changeMillisToLocalDate
 import com.example.fit_iq.ui.presentation.util.roundtoDecimal
 import kotlinx.coroutines.launch
@@ -82,7 +78,9 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
-    windowSizeClass: WindowWidthSizeClass
+    bodyPartId:String,
+    windowSize: WindowWidthSizeClass,
+    onBackIconClick: () -> Unit
 ) {
 
 
@@ -135,24 +133,20 @@ fun DetailsScreen(
         onConfirmButtonClicked = { isDatePickerDialogOpen = false },
     )
     val dummyBodyPart = BodyPart(
-        name = "shoulder",
+        name = "shoulder:$bodyPartId",
         isActive = true,
         measuringUnit = MeasuringUnit.CM.code
     )
 
-    when (windowSizeClass) {
+    when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
                 Column(modifier = Modifier.fillMaxSize()) {
                     DetailsTopBar(
-                        bodyPart = BodyPart(
-                        name = "shoulder",
-                        isActive = true,
-                        measuringUnit = MeasuringUnit.CM.code,
-                        ),
-                        onBackIconClick = {},
+                        bodyPart = dummyBodyPart,
+                        onBackIconClick = onBackIconClick,
                         onDeleteIconClick = { isDeleteBodyPartDialogOpen = true },
                         onUnitIconClick = { isMeasuringUnitBottomSheetOpen = true }
 
@@ -535,7 +529,9 @@ private fun DetailsScreenPreview() {
     Fit_iqTheme {
 
             DetailsScreen(
-                windowSizeClass = WindowWidthSizeClass.Expanded
+                bodyPartId = "",
+                windowSize = WindowWidthSizeClass.Expanded,
+                onBackIconClick = {}
             )
         }
     }

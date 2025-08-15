@@ -9,10 +9,12 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.compose.rememberNavController
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.add_item.AddItemScreen
 import com.example.fit_iq.ui.presentation.dashboard.Dashboardscreen
 import com.example.fit_iq.ui.presentation.details.DetailsScreen
+import com.example.fit_iq.ui.presentation.navigation.NavGraph
 import com.example.fit_iq.ui.presentation.signin.signInScreen
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -25,16 +27,20 @@ import com.example.fit_iq.ui.presentation.signin.signInScreen
         setContent {
             Fit_iqTheme {
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
-                DetailsScreen(windowSizeClass = windowSizeClass.widthSizeClass)
-
-
-
+                val navController = rememberNavController()
+                NavGraph(
+                    navController = navController,
+                    windowSize = windowSizeClass.widthSizeClass
+                )
             }
         }
     }
-
-
 }
+
+
+
+
+
 
 
 

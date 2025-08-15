@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,10 @@ import com.example.fit_iq.ui.presentation.signin.signInScreen
 
 
 @Composable
-fun Dashboardscreen() {
+fun Dashboardscreen(
+    onFabClicked : () -> Unit,
+    onItemCardClicked : (String) -> Unit
+) {
 
 
     var isSignOutDialogOpen by rememberSaveable { mutableStateOf(false) }
@@ -109,7 +113,8 @@ fun Dashboardscreen() {
             ) {
                 items(predefinedBodyParts) { bodyPart ->
                     ItemCard(
-                        bodyPart = bodyPart
+                        bodyPart = bodyPart,
+                        onItemCardClicked = onItemCardClicked
                     )
                 }
 
@@ -121,7 +126,7 @@ fun Dashboardscreen() {
             .align(Alignment.BottomEnd)
                 .padding(24.dp),
 
-            onClick = { /*TODO*/ }
+            onClick = { onFabClicked() }
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "Add Icon")
         }
@@ -160,12 +165,12 @@ private fun DashboardTopBar(modifier: Modifier = Modifier,
 @Composable
 private fun ItemCard(
     modifier : Modifier = Modifier,
-    bodyPart: BodyPart
-
+    bodyPart: BodyPart,
+    onItemCardClicked: (String) -> Unit
 ) {
     Card(
         modifier = modifier,
-        onClick = { /*TODO*/ }
+        onClick = { bodyPart.bodyPartid?.let { onItemCardClicked(it) } }
     ) {
         Row(
             modifier =Modifier.padding(16.dp),
@@ -222,7 +227,10 @@ private fun ItemCard(
     @Composable
     private fun DashboardScreenPreview(){
         Fit_iqTheme {
-            Dashboardscreen()
+            Dashboardscreen(
+                onItemCardClicked = {},
+                onFabClicked = {}
+            )
         }
     }
 

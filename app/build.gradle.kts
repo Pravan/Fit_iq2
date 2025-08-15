@@ -1,10 +1,11 @@
 
 
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+
 }
 
 android {
@@ -66,18 +67,21 @@ dependencies {
 
     //windows size class
     implementation(libs.androidx.compose.material3.windowSizeClass)
-    implementation("androidx.activity:activity-ktx:1.8.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
+
 
     //coil
     implementation(libs.coil.compose)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+
 
     //Desugaring
     
     coreLibraryDesugaring(libs.desugar.jdkLibs)
+
+    //Navigation compose
+    implementation(libs.androidx.navigation.compose)
+   //Kotlinx serialization
+    implementation(libs.kotlinx.serialization.json)
+
 
 }
 
