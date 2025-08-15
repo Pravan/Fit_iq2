@@ -3,11 +3,14 @@ package com.example.fit_iq.ui.presentation.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -37,7 +40,7 @@ fun MeasuringUnitBottomSheet(
     if (isOpen) {
         ModalBottomSheet(
             modifier = modifier,
-            sheetState = sheetState ,
+            sheetState = sheetState,
             onDismissRequest = { onBottomSheetDismiss() },
             dragHandle = {
                 Column(
@@ -56,14 +59,14 @@ fun MeasuringUnitBottomSheet(
                 }
             }
         ) {
-            Spacer(modifier = Modifier.height(12.dp))
-
-
-                MeasuringUnit.entries.forEach { unit ->
+            LazyColumn(
+                contentPadding = PaddingValues(vertical = 8.dp)
+            ) {
+                items(MeasuringUnit.entries) { unit ->
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { onItemClicked(unit)}
+                            .clickable { onItemClicked(unit) }
                             .padding(vertical = 12.dp, horizontal = 20.dp)
 
                     ) {
@@ -71,15 +74,14 @@ fun MeasuringUnitBottomSheet(
                             text = "${unit.label} (${unit.label})",
                             style = MaterialTheme.typography.bodyLarge
                         )
-
                     }
-
                 }
-            Spacer(modifier = Modifier.height(12.dp))
-
             }
-
         }
     }
+}
+
+
+
 
 

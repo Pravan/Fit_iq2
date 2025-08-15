@@ -25,7 +25,7 @@ import com.example.fit_iq.ui.presentation.signin.signInScreen
         setContent {
             Fit_iqTheme {
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
-                DetailsScreen()
+                DetailsScreen(windowSizeClass = windowSizeClass.widthSizeClass)
 
 
 
