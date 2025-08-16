@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -78,6 +79,7 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
+    paddingValues: PaddingValues,
     bodyPartId:String,
     windowSize: WindowWidthSizeClass,
     onBackIconClick: () -> Unit
@@ -141,7 +143,9 @@ fun DetailsScreen(
     when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
             ) {
                 Column(modifier = Modifier.fillMaxSize()) {
                     DetailsTopBar(
@@ -307,6 +311,7 @@ private fun DetailsTopBar(modifier: Modifier = Modifier,
 ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0,0,0,0),
         title = { Text(text = bodyPart?.name ?:" ", maxLines = 1, overflow = TextOverflow.Ellipsis) },
 
 
@@ -531,7 +536,8 @@ private fun DetailsScreenPreview() {
             DetailsScreen(
                 bodyPartId = "",
                 windowSize = WindowWidthSizeClass.Expanded,
-                onBackIconClick = {}
+                onBackIconClick = {},
+                paddingValues = PaddingValues(0.dp)
             )
         }
     }

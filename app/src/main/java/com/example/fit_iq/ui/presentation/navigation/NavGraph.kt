@@ -2,6 +2,7 @@ package com.example.fit_iq.ui.presentation.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -15,7 +16,8 @@ import com.example.fit_iq.ui.presentation.details.DetailsScreen
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    windowSize: WindowWidthSizeClass
+    windowSize: WindowWidthSizeClass,
+    paddingValues: PaddingValues
 
 ) {
     NavHost(
@@ -23,10 +25,15 @@ fun NavGraph(
         startDestination = Routes.DashboardScreen
     ) {
         composable<Routes.SignInScreen> {
-            signInScreen(windowSize = windowSize)
+            signInScreen(
+                windowSize = windowSize,
+                paddingValues = paddingValues
+            )
+
         }
         composable<Routes.DashboardScreen> {
             Dashboardscreen(
+                paddingValues = paddingValues,
                 onFabClicked = { navController.navigate(Routes.AddItemScreen) },
                 onItemCardClicked = { bodyPartId ->
                     navController.navigate(Routes.DetailsScreen(bodyPartId))
@@ -48,6 +55,7 @@ fun NavGraph(
             }
         ) {
             AddItemScreen(
+                paddingValues = paddingValues,
                 onBackIconClick = {navController.navigateUp()}
             )
         }
@@ -71,6 +79,7 @@ fun NavGraph(
 
 
             DetailsScreen(
+                paddingValues = paddingValues,
                 bodyPartId = bodyPart,
                 windowSize = windowSize,
                 onBackIconClick = {navController.navigateUp()}

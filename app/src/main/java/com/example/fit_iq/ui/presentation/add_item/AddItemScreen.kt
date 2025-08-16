@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -39,6 +41,7 @@ import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
 
 @Composable
 fun AddItemScreen(
+    paddingValues: PaddingValues,
     onBackIconClick: () -> Unit
 ){
 
@@ -54,7 +57,9 @@ fun AddItemScreen(
         onConfirmButtonClick = {isAddNewItemDialogOpen = false}
     )
     Column (
-        modifier =  Modifier.fillMaxSize()
+        modifier =  Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
     ){
         AddItemTopBar(
             onAddIconClick = {isAddNewItemDialogOpen = true},
@@ -92,6 +97,7 @@ private fun AddItemTopBar(modifier: Modifier = Modifier,
 ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0,0,0,0),
         title = { Text(text = "Add Item") },
         navigationIcon = {
             IconButton(onClick = { onBackIconClick() }) {
@@ -162,6 +168,7 @@ private fun ItemCard(
 @Composable
 private fun AddItemScreenPreview() {
    AddItemScreen(
-       onBackIconClick = {}
+       onBackIconClick = {},
+       paddingValues = PaddingValues(0.dp)
    )
 }

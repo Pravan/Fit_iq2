@@ -81,6 +81,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
    //Kotlinx serialization
     implementation(libs.kotlinx.serialization.json)
+    //splash screen
+    implementation(libs.androidx.core.splashscreen)
+
 
 
 }

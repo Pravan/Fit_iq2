@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -54,6 +55,7 @@ import com.example.fit_iq.ui.presentation.signin.signInScreen
 
 @Composable
 fun Dashboardscreen(
+    paddingValues: PaddingValues,
     onFabClicked : () -> Unit,
     onItemCardClicked : (String) -> Unit
 ) {
@@ -92,7 +94,9 @@ fun Dashboardscreen(
     )
 
     Box(
-        modifier = Modifier.fillMaxHeight()
+        modifier = Modifier
+            .fillMaxHeight()
+            .padding(paddingValues)
     ){
         Column(
             modifier = Modifier.fillMaxHeight()
@@ -147,6 +151,7 @@ private fun DashboardTopBar(modifier: Modifier = Modifier,
  ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0,0,0,0),
         title = { Text(text = "FIT IQ") },
         actions = {
             IconButton(onClick = {onProfilePicClick()}) {
@@ -229,7 +234,8 @@ private fun ItemCard(
         Fit_iqTheme {
             Dashboardscreen(
                 onItemCardClicked = {},
-                onFabClicked = {}
+                onFabClicked = {},
+                paddingValues = PaddingValues(0.dp)
             )
         }
     }

@@ -5,11 +5,13 @@ package com.example.fit_iq.ui.presentation.signin
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,6 +35,7 @@ import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
 
 @Composable
 fun signInScreen(
+    paddingValues: PaddingValues,
     windowSize: WindowWidthSizeClass
 ) {
 
@@ -54,7 +57,9 @@ fun signInScreen(
     when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             )
@@ -147,7 +152,8 @@ fun signInScreen(
 private fun SignInScreenPreview(){
     Fit_iqTheme {
         signInScreen(
-            windowSize = WindowWidthSizeClass.Medium
+            windowSize = WindowWidthSizeClass.Medium,
+            paddingValues = PaddingValues(0.dp)
         )
     }
 }
