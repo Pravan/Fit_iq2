@@ -23,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -36,10 +37,14 @@ import com.example.fit_iq.ui.presentation.component.Fit_iqDialog
 @Composable
 fun signInScreen(
     paddingValues: PaddingValues,
-    windowSize: WindowWidthSizeClass
+    windowSize: WindowWidthSizeClass,
+    state: SignInState,
+    onEvent: (SignInEvent) -> Unit
 ) {
 
 
+
+    val context = LocalContext.current
 
     var isSignInAnonymousDialogOpen by rememberSaveable { mutableStateOf(false) }
     Fit_iqDialog(
@@ -52,7 +57,10 @@ fun signInScreen(
             )
         },
         onDialogDismiss  = {isSignInAnonymousDialogOpen = false},
-        onConfirmButtonClick = {isSignInAnonymousDialogOpen = false}
+        onConfirmButtonClick = {
+            onEvent(SignInEvent.SignInAnonymous)
+            isSignInAnonymousDialogOpen = false
+        }
     )
     when (windowSize) {
         WindowWidthSizeClass.Compact -> {
@@ -81,11 +89,14 @@ fun signInScreen(
                 )
                 Spacer(modifier = Modifier.fillMaxSize(fraction = 0.4f))
                 GoogleSignInButton(
+                    loadingState = state.isGoogleSignInButtonLoading,
 
-                    onclick = {}
+
+                    onclick = {onEvent(SignInEvent.SignInWithGoogle(context)) }
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 AnonymousSignInButton(
+                    loadingState = state.isAnonymousSignInButtonLoading,
                     onclick = {isSignInAnonymousDialogOpen=true}
                 )
 
@@ -153,7 +164,9 @@ private fun SignInScreenPreview(){
     Fit_iqTheme {
         signInScreen(
             windowSize = WindowWidthSizeClass.Medium,
-            paddingValues = PaddingValues(0.dp)
+            paddingValues = PaddingValues(0.dp),
+            state = SignInState(),
+            onEvent = {}
         )
     }
 }
