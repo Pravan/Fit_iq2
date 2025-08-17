@@ -11,11 +11,13 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.example.fit_iq.ui.presentation.Fit_iqTheme
 import com.example.fit_iq.ui.presentation.navigation.NavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
+@AndroidEntryPoint
  class MainActivity : ComponentActivity() {
 
-
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstancesState: Bundle?) {
         super.onCreate(savedInstancesState)
         installSplashScreen()

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -29,7 +30,7 @@ fun NavGraph(
         startDestination = Routes.DashboardScreen
     ) {
         composable<Routes.SignInScreen> {
-            val signInViewModel:SignInViewModel = SignInViewModel()
+            val signInViewModel:SignInViewModel = hiltViewModel()
             val state by signInViewModel.state.collectAsStateWithLifecycle()
             signInScreen(
                 windowSize = windowSize,
