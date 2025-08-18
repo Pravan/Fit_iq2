@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529722373203",
+    "project_id": "fitiq-5fada",
+    "storage_bucket": "fitiq-5fada.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529722373203:android:e1d991dd85adab0f0642a6",
+        "android_client_info": {
+          "package_name": "com.example.fit_iq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjfQvCEJLLhnLrDKTHaPKUQ8jqbG21zPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

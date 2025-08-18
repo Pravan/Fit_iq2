@@ -3,10 +3,10 @@ agp = "8.11.1"
 hiltAndroidCompiler = "2.56.2"
 hiltCompiler = "1.0.0"
 hiltNavigationCompose = "1.2.0"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 coreKtx = "1.16.0"
 googleServices =  "4.4.3"
-daggerHilt = "2.56.2"
+daggerHilt = "2.57"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -22,15 +22,18 @@ navigation = "2.9.3"
 kotlinxSerialization = "1.9.0"
 ksp = "2.2.10-2.0.2"
 androidxCoreSplashscreen = "1.0.0"
-hilt = "2.56.2"
+hilt = "2.57"
 firebaseBom = "34.1.0"
 androidxHilt = "1.2.0"
+firebaseAuthKtx = "24.0.1"
+firebaseAuthKtxVersion = "24.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-ui-text-google-fonts = {module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
+
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -57,8 +60,12 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuthKtxVersion" }
+
+
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
